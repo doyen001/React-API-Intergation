@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { ReactComponent as ReactLogo } from "../../assets/logo.svg";
-import { Link } from "react-router-dom";
 
 const SignInPage: React.FC = () => {
   const [pageStatus, setPageStatus] = useState<boolean>(true);
   return (
-    <div className="">
-      <h1 className="text-3xl">signIn</h1>
+    <div className="flex min-h-[840px] flex-1 flex-col justify-center">
       {/* <div className="flex flex-col justify-center flex-1 w-full max-w-sm min-h-full px-6 py-12 mx-auto lg:px-8"> */}
       <div className="max-w-sm flex flex-col justify-center mx-auto border border-purple rounded-md bg-slate-500 bg-opacity-10 p-7">
         <div className="flex justify-center">
@@ -29,7 +27,11 @@ const SignInPage: React.FC = () => {
           <div>
             <div className="flex justify-between">
               <label className="text-gray-900 text-md">Password</label>
-              <label className="text-sm text-indigo-600">Forget Password</label>
+              {pageStatus && (
+                <label className="text-sm text-indigo-600">
+                  Forget Password
+                </label>
+              )}
             </div>
             <div className="mt-2">
               <input
@@ -55,7 +57,7 @@ const SignInPage: React.FC = () => {
           )}
           <div>
             <button className="flex justify-center w-full p-2 text-sm font-semibold leading-6 text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              Sign in
+              {pageStatus ? "Sign in" : "Sign up"}
             </button>
           </div>
         </form>
@@ -63,7 +65,7 @@ const SignInPage: React.FC = () => {
           <p className="">Not a member? </p>
           <button
             onClick={() => {
-              setPageStatus(true);
+              setPageStatus((prev) => !prev);
             }}
             className=" text-purple"
           >
